@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Abcde on 2017/12/11.
  */
 public class JdbcUtil {
-    private  static  String  url="jdbc:mysql://localhost:3306/bishe";
+    private  static  String  url="jdbc:mysql://localhost:3306/yulongrecruit";
     private  static  String driver = "com.mysql.jdbc.Driver";
     private  static  String JDBC_ACCOUNT="root";
     private  static  String JDBC_PASSWORD="mysql";

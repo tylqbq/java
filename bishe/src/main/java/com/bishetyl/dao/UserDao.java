@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Abcde on 2017/12/12.
+ * Created by 汤玉龙 on 2017/12/12.
  */
 public class UserDao {
     private Connection con = null;

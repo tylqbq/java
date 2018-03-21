@@ -1,7 +1,7 @@
 package com.bishetyl.entity;
 
 /**
- * Created by Abcde on 2017/12/12.
+ * Created by ÌÀÓñÁú on 2017/12/12.
  */
 public class User {
     private  int     id;

@@ -1,7 +1,7 @@
 package com.bishetyl.entity;
 
 /**
- * Created by Administrator on 2018/3/20.
+ * Created by 汤玉龙 on 2018/3/20. 求职者
  */
 public class JobSeeker {
     private  int     id;

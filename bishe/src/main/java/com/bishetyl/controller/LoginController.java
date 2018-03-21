@@ -2,6 +2,7 @@ package com.bishetyl.controller;
 
 import com.bishetyl.entity.User;
 import com.bishetyl.entity.JobSeeker;
+import com.bishetyl.service.JobSeekerSevice;
 import com.bishetyl.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +29,9 @@ public class LoginController {
     @ResponseBody
     public Result login(@RequestBody JobSeeker jobSeeker){
         result = new Result();
-        UserService userService = new UserService();
-        User userReturn = null;
+        JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
         try {
-            result = userService.login(jobSeeker);
+            result = jobSeekerSevice.login(jobSeeker);
         } catch (Exception e) {
             e.printStackTrace();
         }
