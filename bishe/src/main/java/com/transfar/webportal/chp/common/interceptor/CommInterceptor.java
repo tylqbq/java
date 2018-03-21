@@ -1,0 +1,27 @@
+package com.transfar.webportal.chp.common.interceptor;
+
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Created by ÌÀÓñÁú on 2018/3/21.  À¹½ØÆ÷ ÅÐ¶ÏÊÇ·ñµÇÂ¼
+ */
+public class CommInterceptor extends HandlerInterceptorAdapter {
+    public boolean preHandle(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws Exception {
+        System.out.println(session);
+        System.out.println(session.getAttribute("user"));
+        //´Ósession»ñÈ¡µÇÂ¼ÐÅÏ¢
+        if(session.getAttribute("user")!=null) {
+            System.out.println("²»À¹½Ø");
+            return true;
+        }else {
+            System.out.println("À¹½Ø");
+            System.out.println("Interceptor£ºÌø×ªµ½loginÒ³Ãæ£¡");
+            response.sendRedirect("/login");
+            return false;
+        }
+    }
+}

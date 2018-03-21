@@ -5,6 +5,9 @@ import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.entity.User;
 import com.bishetyl.util.Result;
 
+import javax.security.auth.Subject;
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by 汤玉龙 on 2018/3/21.
  */

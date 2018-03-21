@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bishetyl.dao.UserDao;
 import com.bishetyl.util.Result;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Abcde on 2017/12/11.
  */
@@ -27,14 +29,25 @@ public class LoginController {
     }
     @RequestMapping("/user/login")
     @ResponseBody
-    public Result login(@RequestBody JobSeeker jobSeeker){
+    public Result login(@RequestBody JobSeeker jobSeeker,HttpSession session){
         result = new Result();
         JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
         try {
             result = jobSeekerSevice.login(jobSeeker);
+            result.setData(null);
+            session.setAttribute("user", jobSeeker);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
+    }
+    @RequestMapping("/user/logout")
+    @ResponseBody
+    public Result logout(HttpSession session){
+        session.invalidate();
+        result = new Result();
+        result.setStatus(Boolean.valueOf(false));
+        result.setMessage("退出成功！");
         return result;
     }
 
