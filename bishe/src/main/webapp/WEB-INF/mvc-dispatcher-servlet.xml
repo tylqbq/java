@@ -45,9 +45,12 @@
     <mvc:annotation-driven>
     </mvc:annotation-driven>
 
-    <!--配置拦截器  未成功-->
+    <!--配置拦截器 -->
     <mvc:interceptors>
-        <bean class="com.transfar.webportal.chp.common.interceptor.CommInterceptor"/>
+        <mvc:interceptor>
+            <mvc:mapping path="/recruit"/>
+            <bean class="com.transfar.webportal.chp.common.interceptor.CommInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
 </beans>

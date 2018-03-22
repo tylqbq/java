@@ -42,7 +42,7 @@ public class JobSeekerSevice {
         }
         JobSeekerDao jobSeekerDao = new JobSeekerDao();
         jobSeekerResult = jobSeekerDao.findJobSeekerByPhoneNumberOrEmail(phoneOrEmail);
-        System.out.println(password.equals(jobSeekerResult.getPassword()));
+//        System.out.println(password.equals(jobSeekerResult.getPassword()));
         try{
             if (jobSeekerResult == null){
                 throw  new Exception("该账号不存在！");

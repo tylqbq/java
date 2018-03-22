@@ -1,5 +1,7 @@
 package com.transfar.webportal.chp.common.interceptor;
 
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,21 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21.  À¹½ØÆ÷ ÅĞ¶ÏÊÇ·ñµÇÂ¼
+ * Created by æ±¤ç‰é¾™ on 2018/3/21.  ç™»å½•æ‹¦æˆªå™¨
  */
-public class CommInterceptor extends HandlerInterceptorAdapter {
-    public boolean preHandle(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws Exception {
+public class CommInterceptor implements HandlerInterceptor {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+                             Object handler) throws Exception {
+        //è·å–Session
+        HttpSession session = request.getSession();
         System.out.println(session);
         System.out.println(session.getAttribute("user"));
-        //´Ósession»ñÈ¡µÇÂ¼ĞÅÏ¢
         if(session.getAttribute("user")!=null) {
-            System.out.println("²»À¹½Ø");
+            System.out.println("sessionå­˜åœ¨");
             return true;
         }else {
-            System.out.println("À¹½Ø");
-            System.out.println("Interceptor£ºÌø×ªµ½loginÒ³Ãæ£¡");
-            response.sendRedirect("/login");
+            System.out.println("sessionä¸å­˜åœ¨");
             return false;
         }
+    }
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response, Object handler, Exception exc)
+            throws Exception {
+
+    }
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+                           Object handler,ModelAndView modelAndView) throws Exception {
     }
 }
