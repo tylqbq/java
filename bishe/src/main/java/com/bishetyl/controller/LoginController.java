@@ -4,6 +4,7 @@ import com.bishetyl.entity.User;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.service.JobSeekerSevice;
 import com.bishetyl.service.UserService;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bishetyl.dao.UserDao;
 import com.bishetyl.util.Result;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -49,6 +52,12 @@ public class LoginController {
         result.setStatus(Boolean.valueOf(false));
         result.setMessage("退出成功！");
         return result;
+    }
+
+    @RequestMapping("/user/register")
+    @ResponseBody
+    public void register(HttpServletRequest request){
+
     }
 
     @RequestMapping("user/changePsd")
