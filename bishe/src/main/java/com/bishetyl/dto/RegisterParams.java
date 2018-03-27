@@ -6,7 +6,35 @@ package com.bishetyl.dto;
 public class RegisterParams {
     private String phoneNumber;
     private String password;
+    private String repeatPassword;
+    private String captcha;
+    private String verificationCode;
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
+
     private Integer vertificationCode;//ÑéÖ¤Âë
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getPassword() {
         return password;
@@ -16,19 +44,11 @@ public class RegisterParams {
         this.password = password;
     }
 
-    public Integer getCode() {
-        return 1111;
+    public Integer getVertificationCode() {
+        return vertificationCode;
     }
 
-    public void setCode(Integer vertificationCode) {
+    public void setVertificationCode(Integer vertificationCode) {
         this.vertificationCode = vertificationCode;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }

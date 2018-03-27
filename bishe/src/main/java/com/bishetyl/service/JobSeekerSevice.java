@@ -1,6 +1,7 @@
 package com.bishetyl.service;
 
 import com.bishetyl.dao.JobSeekerDao;
+import com.bishetyl.dto.RegisterParams;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.entity.User;
 import com.bishetyl.util.Result;
@@ -60,5 +61,20 @@ public class JobSeekerSevice {
             return result;
         }
     }
-
+    /**
+     *注册
+     * */
+    public Result register(RegisterParams params) throws Exception{
+        Result result = new Result();
+        JobSeekerDao jobSeekerDao = new JobSeekerDao();
+        Boolean rs = jobSeekerDao.insertJobSeeker(params);
+        if(rs){
+            result.setStatus(Boolean.valueOf(true));
+            result.setMessage("注册成功");
+        }else{
+            result.setStatus(Boolean.valueOf(false));
+            result.setMessage("注册失败");
+        }
+        return result;
+    }
  }

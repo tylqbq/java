@@ -1,5 +1,6 @@
 package com.bishetyl.controller;
 
+import com.bishetyl.dto.RegisterParams;
 import com.bishetyl.entity.User;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.service.JobSeekerSevice;
@@ -56,8 +57,16 @@ public class LoginController {
 
     @RequestMapping("/user/register")
     @ResponseBody
-    public void register(HttpServletRequest request){
-
+    public Result register(@RequestBody RegisterParams params){
+        result = new Result();
+        JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
+        try {
+            result = jobSeekerSevice.register(params);
+            result.setData(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @RequestMapping("user/changePsd")
