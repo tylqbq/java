@@ -1,5 +1,6 @@
 package com.bishetyl.controller;
 
+import com.bishetyl.dto.LoginParams;
 import com.bishetyl.dto.RegisterParams;
 import com.bishetyl.entity.User;
 import com.bishetyl.entity.JobSeeker;
@@ -31,15 +32,15 @@ public class LoginController {
     public  String loginSbmit(){
         return  "";
     }
+
     @RequestMapping("/user/login")
     @ResponseBody
-    public Result login(@RequestBody JobSeeker jobSeeker,HttpSession session){
+    public Result login(@RequestBody LoginParams loginParams,HttpSession session){
         result = new Result();
         JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
         try {
-            result = jobSeekerSevice.login(jobSeeker);
-            result.setData(null);
-            session.setAttribute("user", jobSeeker);
+            result = jobSeekerSevice.login(loginParams);
+            session.setAttribute("user", result.getData());
         } catch (Exception e) {
             e.printStackTrace();
         }

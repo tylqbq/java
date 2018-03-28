@@ -48,7 +48,7 @@
     <!--配置拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/recruit"/>
+            <mvc:mapping path="/user/logout"/>
             <bean class="com.transfar.webportal.chp.common.interceptor.CommInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
