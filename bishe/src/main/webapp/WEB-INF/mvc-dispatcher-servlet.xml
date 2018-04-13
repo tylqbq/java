@@ -53,4 +53,5 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:resources mapping="/resources/**" location="/resources/log4j.properties" />
 </beans>

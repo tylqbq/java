@@ -6,6 +6,7 @@ import com.bishetyl.entity.User;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.service.JobSeekerSevice;
 import com.bishetyl.service.UserService;
+import com.bishetyl.util.Log;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/")
 @ResponseBody
+@Log(title = "用户")
 public class LoginController {
     Result result = null;
 
@@ -35,6 +37,7 @@ public class LoginController {
 
     @RequestMapping("/user/login")
     @ResponseBody
+    @Log(title = "用户登录")
     public Result login(@RequestBody LoginParams loginParams,HttpSession session){
         result = new Result();
         JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
