@@ -1,21 +1,30 @@
 package com.bishetyl.entity;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21. ÕĞÆ¸
+ * Created by æ±¤ç‰é¾™ on 2018/3/21. æ‹›è˜
  */
 public class Recruit {
     private int id;
-    private String positionName;
-    private String workPlace;
-    private int salaryRange; //Ğ½×Ê·¶Î§  ÓÃÊı×Ö´ú±í²»Í¬·¶Î§ Ïê¼ûtxt¼ÇÂ¼
-    private String minRecruitsNumber; //ÕĞÆ¸ÈËÊı·¶Î§ ×îĞ¡
-    private String maxRecruitsNumber; //ÕĞÆ¸ÈËÊı·¶Î§ ×î´ó
-    private String positionInfo;  //Ö°Î»ĞÅÏ¢
-    private String contactWay;  //ÁªÏµ·½Ê½
-    private int education;  //Ñ§Àú ÓÃÊı×Ö´ú±í²»Í¬Ñ§Àú Ïê¼ûtxt¼ÇÂ¼
-    private int workType;   //¹¤×÷ÀàĞÍ ÓÃÊı×Ö´ú±í²»Í¬Ñ§Àú Ïê¼ûtxt¼ÇÂ¼
-    private String publishDate; //·¢²¼ÈÕÆÚ
-    private int companyId;
+    private String positionName; //èŒä½åç§°
+    private String workPlace;    //å·¥ä½œåœ°ç‚¹
+    private String salaryRange; //è–ªèµ„èŒƒå›´
+    private String recruitsNumber; //æ‹›è˜äººæ•°
+    private String positionInfo;  //èŒä½ä¿¡æ¯
+    private String contactWay;  //è”ç³»æ–¹å¼
+    private String workTime;  //å·¥ä½œå¹´é™
+    private String education;  //å­¦å†
+    private String workType;   //å·¥ä½œç±»å‹
+    private String publishDate; //å‘å¸ƒæ—¥æœŸ
+    private String companyName; //å…¬å¸åç§°
+    private int companyId;   //æ‰€å±å…¬å¸id
+
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
+    }
 
     public int getId() {
         return id;
@@ -41,30 +50,20 @@ public class Recruit {
         this.workPlace = workPlace;
     }
 
-    public int getSalaryRange() {
+    public String getSalaryRange() {
         return salaryRange;
     }
 
-    public void setSalaryRange(int salaryRange) {
+    public void setSalaryRange(String salaryRange) {
         this.salaryRange = salaryRange;
     }
-
-    public String getMinRecruitsNumber() {
-        return minRecruitsNumber;
+    public String getRecruitsNumber() {
+        return recruitsNumber;
     }
 
-    public void setMinRecruitsNumber(String minRecruitsNumber) {
-        this.minRecruitsNumber = minRecruitsNumber;
+    public void setRecruitsNumber(String recruitsNumber) {
+        this.recruitsNumber = recruitsNumber;
     }
-
-    public String getMaxRecruitsNumber() {
-        return maxRecruitsNumber;
-    }
-
-    public void setMaxRecruitsNumber(String maxRecruitsNumber) {
-        this.maxRecruitsNumber = maxRecruitsNumber;
-    }
-
     public String getPositionInfo() {
         return positionInfo;
     }
@@ -81,19 +80,19 @@ public class Recruit {
         this.contactWay = contactWay;
     }
 
-    public int getEducation() {
+    public String getEducation() {
         return education;
     }
 
-    public void setEducation(int education) {
+    public void setEducation(String education) {
         this.education = education;
     }
 
-    public int getWorkType() {
+    public String getWorkType() {
         return workType;
     }
 
-    public void setWorkType(int workType) {
+    public void setWorkType(String workType) {
         this.workType = workType;
     }
 
@@ -111,5 +110,13 @@ public class Recruit {
 
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

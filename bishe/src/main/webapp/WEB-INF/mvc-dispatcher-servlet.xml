@@ -53,5 +53,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <mvc:resources mapping="/resources/**" location="/resources/log4j.properties" />
+    <!-- 拦截器配置XX-->
+    <!--<mvc:resources mapping="/resources/**" location="/resources/log4j.properties" />-->
 </beans>
