@@ -65,44 +65,44 @@ public class RecruitDao {
 //                paramsList.add("%" + address + "%");
 //            }
             //发布时间
-//            String publishTime = recruitSearchParams.getPublishTime();
-//            if (publishTime != null && !publishTime.trim().isEmpty()){
-//                sql.append(" and publishDate >=  CURDATE()-? ");
-//                  countSql.append(" and publishDate >=  CURDATE()-? ");
-//                paramsList.add( publishTime);
-//            }
+            String publishTime = recruitSearchParams.getPublishTime();
+            if (publishTime != null && !publishTime.trim().isEmpty() && !publishTime.equals("所有")){
+                sql.append(" and publishDate >=  CURDATE()-? ");
+                countSql.append(" and publishDate >=  CURDATE()-? ");
+                paramsList.add(publishTime);
+            }
             //薪资范围
-//            String salaryRang = recruitSearchParams.getSalaryRang();
-//            if (salaryRang != null && !salaryRang.trim().isEmpty()){
-//                sql.append(" and salaryRang = ? ");
-//                countSql.append(" and salaryRang = ? ");
-//                paramsList.add(salaryRang);
-//            }
+            String salaryRang = recruitSearchParams.getSalaryRang();
+            if (salaryRang != null && !salaryRang.trim().isEmpty() && !salaryRang.equals("所有")){
+                sql.append(" and salaryRang = ? ");
+                countSql.append(" and salaryRang = ? ");
+                paramsList.add(salaryRang);
+            }
 
             //公司类型
             String companyType = recruitSearchParams.getCompanyType();
-            if (companyType != null && !companyType.trim().isEmpty()){
+            if (companyType != null && !companyType.trim().isEmpty() && !companyType.equals("所有")){
                 sql.append(" and company.companyType = ? ");
                 countSql.append(" and company.companyType = ? ");
                 paramsList.add(companyType);
             }
             //工作年限
             String workTime = recruitSearchParams.getWorkTime();
-            if (workTime != null && !workTime.trim().isEmpty()){
+            if (workTime != null && !workTime.trim().isEmpty() && !workTime.equals("所有")){
                 sql.append(" and recruit.workTime = ? ");
                 countSql.append(" and recruit.workTime = ? ");
                 paramsList.add(workTime);
             }
             //学历
             String education = recruitSearchParams.getEducation();
-            if (education != null && !education.trim().isEmpty()){
+            if (education != null && !education.trim().isEmpty() && !education.equals("所有")){
                 sql.append(" and recruit.education = ? ");
                 countSql.append(" and recruit.education = ? ");
                 paramsList.add(education);
             }
             //公司规模
             String staffNumber = recruitSearchParams.getStaffNumber();
-            if (staffNumber != null && !staffNumber.trim().isEmpty()){
+            if (staffNumber != null && !staffNumber.trim().isEmpty() && !staffNumber.equals("所有")){
                 sql.append(" and company.staffNumber = ? ");
                 countSql.append(" and recruit.education = ? ");
                 paramsList.add(staffNumber);
@@ -110,7 +110,7 @@ public class RecruitDao {
 
             //工作类型
             String workType = recruitSearchParams.getWorkType();
-            if (workType != null && !workType.trim().isEmpty()){
+            if (workType != null && !workType.trim().isEmpty() && !workType.equals("所有")){
                 sql.append(" and recruit.workType = ? ");
                 countSql.append(" and recruit.workType = ? ");
                 paramsList.add(workType);
