@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class CityController {
     @RequestMapping("/city/getCityList")
     @ResponseBody
     @Log(title = "用户登录")
-    public Result getCityList(@RequestBody String pyCode){
-//        System.out.println(pyCode);
+    public Result getCityList(@RequestParam(value = "pyCode") String pyCode){
+        System.out.println(pyCode);
         CityService cityService = new CityService();
         List<String> cityList = new ArrayList<String>();
         cityList = cityService.getCityList(pyCode);
