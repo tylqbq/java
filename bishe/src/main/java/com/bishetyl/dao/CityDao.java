@@ -30,7 +30,7 @@ public class CityDao {
             this.pst.setString(1, pyCode);
             this.rs = this.pst.executeQuery();
             while(this.rs.next()){
-                String cityName = this.rs.getString("pyCode");
+                String cityName = this.rs.getString("cityName");
                 cityList.add(cityName);
             }
         }catch (SQLException e) {

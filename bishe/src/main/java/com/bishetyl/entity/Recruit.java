@@ -15,8 +15,8 @@ public class Recruit {
     private String education;  //学历
     private String workType;   //工作类型
     private String publishDate; //发布日期
-    private String companyName; //公司名称
     private int companyId;   //所属公司id
+    private String companyName;//所属公司名称
 
     public String getWorkTime() {
         return workTime;

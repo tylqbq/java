@@ -1,6 +1,7 @@
 package com.bishetyl.dao;
 
 import com.bishetyl.dto.RecruitResult;
+import com.bishetyl.dto.RecruitSearchByCoIDParams;
 import com.bishetyl.dto.RecruitSearchParams;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.JdbcUtil;
@@ -182,6 +183,95 @@ public class RecruitDao {
         } finally {
             jdbcUtil.releaseConnection(this.con);
         }
+        return recruitResult;
+    }
+
+    public Recruit getRecruitById(int recruitId){
+        Recruit recruit = new Recruit();
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "select * from recruit,company where recruit.id = ? and recruit.companyId = company.id";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, recruitId);
+            this.rs = this.pst.executeQuery();
+            while(this.rs.next()){
+                recruit.setId(this.rs.getInt("id"));
+                recruit.setPositionName(this.rs.getString("positionName"));
+                recruit.setWorkPlace(this.rs.getString("workPlace"));
+                recruit.setSalaryRange(this.rs.getString("salaryRange"));
+                recruit.setRecruitsNumber(this.rs.getString("recruitsNumber"));
+                recruit.setPositionInfo(this.rs.getString("positionInfo"));
+                recruit.setContactWay(this.rs.getString("contactWay"));
+                recruit.setWorkTime(this.rs.getString("workTime"));
+                recruit.setEducation(this.rs.getString("education"));
+                recruit.setWorkType(this.rs.getString("workType"));
+                recruit.setPublishDate(this.rs.getString("publishDate"));
+                recruit.setCompanyId(this.rs.getInt("companyId"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return recruit;
+    }
+
+    public RecruitResult getRecruitByCompanyId(RecruitSearchByCoIDParams params){
+        List<Recruit> recruitList = new ArrayList<Recruit>();
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        PageParams pageParamsReturn = new PageParams();
+        RecruitResult recruitResult = new RecruitResult();
+        int companyId = params.getCompanyId();
+        //分页查询  每次指定查询多少条数据
+        int pageNumber = params.getPageNumber();
+        int pageSize = params.getPageSize();
+        int startIndex = (pageNumber-1)*pageSize;
+
+        try {
+            this.con = jdbcUtil.getConnection();
+            String countSql = "select * from recruit where companyId = ?";
+            this.pst = this.con.prepareStatement(countSql.toString());
+            this.pst.setInt(1, companyId);
+            this.rs = this.pst.executeQuery();
+            int rowCount = 0;
+            while (this.rs.next()){
+                rowCount = this.rs.getInt(1);
+            }
+
+            StringBuilder sql = new StringBuilder("select * from recruit where companyId = ?");
+
+            sql.append(" limit "+startIndex+","+pageSize);
+            this.pst = this.con.prepareStatement(sql.toString());
+            this.pst.setInt(1, companyId);
+            this.rs = this.pst.executeQuery();
+            while(this.rs.next()){
+                Recruit recruit = new Recruit();
+                recruit.setId(this.rs.getInt("id"));
+                recruit.setPositionName(this.rs.getString("positionName"));
+                recruit.setWorkPlace(this.rs.getString("workPlace"));
+                recruit.setSalaryRange(this.rs.getString("salaryRange"));
+                recruit.setRecruitsNumber(this.rs.getString("recruitsNumber"));
+                recruit.setPositionInfo(this.rs.getString("positionInfo"));
+                recruit.setContactWay(this.rs.getString("contactWay"));
+                recruit.setWorkTime(this.rs.getString("workTime"));
+                recruit.setEducation(this.rs.getString("education"));
+                recruit.setWorkType(this.rs.getString("workType"));
+                recruit.setPublishDate(this.rs.getString("publishDate"));
+                recruit.setCompanyId(this.rs.getInt("companyId"));
+                recruitList.add(recruit);
+            }
+
+            pageParamsReturn.setTotal(rowCount);
+            pageParamsReturn.setPageSize(params.getPageSize());
+            pageParamsReturn.setPageNumber(params.getPageNumber());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        recruitResult.setRecruitList(recruitList);
+        recruitResult.setPageParams(pageParamsReturn);
         return recruitResult;
     }
 }

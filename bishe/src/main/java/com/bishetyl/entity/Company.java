@@ -3,28 +3,20 @@ package com.bishetyl.entity;
 import java.util.List;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21.¹«Ë¾
+ * Created by æ±¤ç‰é¾™ on 2018/3/21.å…¬å¸å®ä½“ç±»
  */
 public class Company {
     private int id;
-    private String companyName;
-    private String companyType;//¹«Ë¾ĞÔÖÊ
-    private int staffNumber;//Ô±¹¤ÊıÁ¿
-    private String companyInfo;//¹«Ë¾ĞÅÏ¢
-    private String companyBussiness;//¹«Ë¾ÒµÎñ
-    private List<Recruit> recruits;//ÕĞÆ¸ÁĞ±í
-
-    public List<Recruit> getRecruits() {
-        return recruits;
-    }
-
-    public void setRecruits(List<Recruit> recruits) {
-        this.recruits = recruits;
-    }
+    private String companyName;//å…¬å¸åç§°
+    private String companyType;//å…¬å¸ç±»å‹
+    private String staffNumber;//å‘˜å·¥äººæ•°
+    private String companyInfo;//å…¬å¸ä¿¡æ¯
+    private String companyBusiness;//å…¬å¸ä¸šåŠ¡
+    private String companyAddress;//å…¬å¸åœ°å€
+    private List<Recruit> recruits;// å…¬å¸å‘å¸ƒçš„æ‹›è˜
 
     public int getId() {
         return id;
-
     }
 
     public void setId(int id) {
@@ -47,11 +39,11 @@ public class Company {
         this.companyType = companyType;
     }
 
-    public int getStaffNumber() {
+    public String getStaffNumber() {
         return staffNumber;
     }
 
-    public void setStaffNumber(int staffNumber) {
+    public void setStaffNumber(String staffNumber) {
         this.staffNumber = staffNumber;
     }
 
@@ -63,11 +55,27 @@ public class Company {
         this.companyInfo = companyInfo;
     }
 
-    public String getCompanyBussiness() {
-        return companyBussiness;
+    public String getCompanyBusiness() {
+        return companyBusiness;
     }
 
-    public void setCompanyBussiness(String companyBussiness) {
-        this.companyBussiness = companyBussiness;
+    public void setCompanyBusiness(String companyBussiness) {
+        this.companyBusiness = companyBussiness;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+
+    public List<Recruit> getRecruits() {
+        return recruits;
+    }
+
+    public void setRecruits(List<Recruit> recruits) {
+        this.recruits = recruits;
     }
 }

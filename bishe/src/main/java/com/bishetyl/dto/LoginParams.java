@@ -1,7 +1,7 @@
 package com.bishetyl.dto;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/28.µÇÂ¼²ÎÊı
+ * Created by æ±¤ç‰é¾™ on 2018/3/28.  ç™»å½•å‚æ•°
  */
 public class LoginParams {
     private String phoneNumber;

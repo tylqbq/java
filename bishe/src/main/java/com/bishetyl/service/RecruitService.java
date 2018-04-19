@@ -2,8 +2,10 @@ package com.bishetyl.service;
 
 import com.bishetyl.dao.RecruitDao;
 import com.bishetyl.dto.RecruitResult;
+import com.bishetyl.dto.RecruitSearchByCoIDParams;
 import com.bishetyl.dto.RecruitSearchParams;
 import com.bishetyl.entity.Recruit;
+import com.bishetyl.util.PageParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,22 @@ public class RecruitService {
         RecruitResult recruitResult = new RecruitResult();
         RecruitDao recruitDao = new RecruitDao();
         recruitResult = recruitDao.getRecruit(searchParams);
+        return recruitResult;
+    }
+
+    //搜索招聘ById
+    public Recruit getRecruitById( int recruitId){
+        Recruit recruit = new Recruit();
+        RecruitDao recruitDao = new RecruitDao();
+        recruit = recruitDao.getRecruitById(recruitId);
+        return recruit;
+    }
+
+    //搜索招聘ByCompanyId
+    public RecruitResult getRecruitByCompanyId(RecruitSearchByCoIDParams params){
+        RecruitResult recruitResult = new RecruitResult();
+        RecruitDao recruitDao = new RecruitDao();
+        recruitResult = recruitDao.getRecruitByCompanyId(params);
         return recruitResult;
     }
 

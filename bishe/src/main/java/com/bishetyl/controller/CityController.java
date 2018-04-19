@@ -25,11 +25,16 @@ public class CityController {
     @ResponseBody
     @Log(title = "用户登录")
     public Result getCityList(@RequestParam(value = "pyCode") String pyCode){
-        System.out.println(pyCode);
+        result = new Result();
         CityService cityService = new CityService();
         List<String> cityList = new ArrayList<String>();
-        cityList = cityService.getCityList(pyCode);
-        result.setData(cityList);
-        return  result;
+        try{
+            cityList = cityService.getCityList(pyCode);
+            result.setData(cityList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
     }
 }
