@@ -45,6 +45,7 @@ public class GetRecruitController {
         return  result;
     }
 
+    //获得职位 By  公司id
     @RequestMapping("/recruit/getrecruitbycompanyid")
     @ResponseBody
     public Result getRecruitByCompanyId(@RequestBody RecruitSearchByCoIDParams params){
@@ -53,6 +54,17 @@ public class GetRecruitController {
         recruitResult = recruitService.getRecruitByCompanyId(params);
         result = new Result();
         result.setData(recruitResult);
+        return  result;
+    }
+
+    //收藏职位
+    @RequestMapping("/recruit/collectionrecruit")
+    @ResponseBody
+    public Result collectionRecruit(@RequestParam(value = "recruitId") int recruitId,@RequestParam(value = "jobSeekerId") int jobSeekerId){
+        RecruitService recruitService = new RecruitService();
+        String info = recruitService.collectionRecruit(recruitId,jobSeekerId);
+        result = new Result();
+        result.setData(info);
         return  result;
     }
 }

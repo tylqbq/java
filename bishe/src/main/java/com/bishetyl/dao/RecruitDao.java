@@ -230,7 +230,7 @@ public class RecruitDao {
 
         try {
             this.con = jdbcUtil.getConnection();
-            String countSql = "select * from recruit where companyId = ?";
+            String countSql = "select count(*) from recruit where companyId = ?";
             this.pst = this.con.prepareStatement(countSql.toString());
             this.pst.setInt(1, companyId);
             this.rs = this.pst.executeQuery();
@@ -273,5 +273,26 @@ public class RecruitDao {
         recruitResult.setRecruitList(recruitList);
         recruitResult.setPageParams(pageParamsReturn);
         return recruitResult;
+    }
+
+    public Boolean collectionRecruit(int recruitId , int jobSeekerId,String collectionTime){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "INSERT INTO collectionrecruit (jobSeekerId,recruitId,collectionTime) VALUES (?,?,?) ";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, recruitId);
+            this.pst.setInt(2, jobSeekerId);
+            this.pst.setString(3,collectionTime);
+            int count = this.pst.executeUpdate();
+            if(count >0 ){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return false;
     }
 }
