@@ -8,6 +8,8 @@ import com.bishetyl.dto.RecruitSearchParams;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.PageParams;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
 /**
  * Created by 汤玉龙 on 2018/4/17.
  */
+@Controller
+@ResponseBody
 public class RecruitService {
     public RecruitService(){
 
