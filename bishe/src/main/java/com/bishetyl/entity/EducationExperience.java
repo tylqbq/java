@@ -1,14 +1,79 @@
 package com.bishetyl.entity;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21.
+ * Created by æ±¤ç‰é¾™ on 2018/3/21. ç®€å† æ•™è‚²ç»å†
  */
 public class EducationExperience {
     private int id;
-    private String startDate; //¿ªÊ¼ÈÕÆÚ
-    private String endDate;//½áÊøÈÕÆÚ
-    private String education;//Ñ§Àú
-    private String school;//Ñ§Ğ£
-    private String profession;//×¨Òµ
-    private int resumeId;//¼òÀúID
+    private String startDate; //å¼€å§‹æ—¥æœŸ
+    private String endDate;//ç»“æŸæ—¥æœŸ
+    private String education;//å­¦å†
+    private String school;//å­¦æ ¡
+    private String profession;//ä¸“ä¸š
+    private String details;//ä¸“ä¸šè¯¦æƒ…
+    private int resumeId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public int getResumeId() {
+        return resumeId;
+    }
+
+    public void setResumeId(int resumeId) {
+        this.resumeId = resumeId;
+    }
 }

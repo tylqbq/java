@@ -3,46 +3,28 @@ package com.bishetyl.entity;
 import java.util.List;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21. ¼òÀú
+ * Created by æ±¤ç‰é¾™ on 2018/3/21. ç®€å†
  */
 public class Resume {
     private int id;
-    private String name;
-    private String sex;
-    private String birthDate;
-    private String phoneNumber;
-    private String email;
-    private String address;
-    private String  annualIncome;//ÄêÊÕÈë
-    private int isPublic;  //ÊÇ·ñ¹«¿ª
-    private int browsingTimes;//ä¯ÀÀ´ÎÊı
-    private EducationExperience educationExperience; //½ÌÓı¾­Àú
-    private JobIntention jobIntention;//¹¤×÷ÒâÏò
-    private List<WorkExperience> workExperiences;//¹¤×÷¾­Ñé  ¿ÉÒÔ¶à¸ö
+    private String name; //å§“å
+    private String sex;  //æ€§åˆ«
+    private String birthDate;//å‡ºç”Ÿæ—¥æœŸ
+    private String phoneNumber;//ç”µè¯
+    private String email;//é‚®ç®±
+    private String address;//å±…ä½åœ°å€
+    private String  annualIncome;//ç›®å‰å¹´æ”¶å…¥
+    private int isPublic;  //æ˜¯å¦å…¬å¼€
+    private int browsingTimes;//æµè§ˆæ¬¡æ•°
 
-    public EducationExperience getEducationExperience() {
-        return educationExperience;
-    }
 
-    public void setEducationExperience(EducationExperience educationExperience) {
-        this.educationExperience = educationExperience;
-    }
+    private JobIntention jobIntention;//æ±‚èŒæ„å‘
+    private List<WorkExperience> workExperiencesList;//å·¥ä½œç»éªŒ
+    private List<ProjectExperience> projectExperiencesList;//é¡¹ç›®ç»éªŒ
+    private EducationExperience educationExperience;//æ•™è‚²ç»å†
+    private List<SchoolHonor> schoolHonorList; //å­¦æ ¡è£èª‰
+    private List<SchoolDuties> schoolDutiesList;//å­¦æ ¡èŒåŠ¡
 
-    public JobIntention getJobIntention() {
-        return jobIntention;
-    }
-
-    public void setJobIntention(JobIntention jobIntention) {
-        this.jobIntention = jobIntention;
-    }
-
-    public List<WorkExperience> getWorkExperiences() {
-        return workExperiences;
-    }
-
-    public void setWorkExperiences(List<WorkExperience> workExperiences) {
-        this.workExperiences = workExperiences;
-    }
 
     public int getId() {
         return id;
@@ -122,5 +104,53 @@ public class Resume {
 
     public void setBrowsingTimes(int browsingTimes) {
         this.browsingTimes = browsingTimes;
+    }
+
+    public JobIntention getJobIntention() {
+        return jobIntention;
+    }
+
+    public void setJobIntention(JobIntention jobIntention) {
+        this.jobIntention = jobIntention;
+    }
+
+    public List<WorkExperience> getWorkExperiencesList() {
+        return workExperiencesList;
+    }
+
+    public void setWorkExperiencesList(List<WorkExperience> workExperiencesList) {
+        this.workExperiencesList = workExperiencesList;
+    }
+
+    public List<ProjectExperience> getProjectExperiencesList() {
+        return projectExperiencesList;
+    }
+
+    public void setProjectExperiencesList(List<ProjectExperience> projectExperiencesList) {
+        this.projectExperiencesList = projectExperiencesList;
+    }
+
+    public EducationExperience getEducationExperience() {
+        return educationExperience;
+    }
+
+    public void setEducationExperience(EducationExperience educationExperience) {
+        this.educationExperience = educationExperience;
+    }
+
+    public List<SchoolHonor> getSchoolHonorList() {
+        return schoolHonorList;
+    }
+
+    public void setSchoolHonorList(List<SchoolHonor> schoolHonorList) {
+        this.schoolHonorList = schoolHonorList;
+    }
+
+    public List<SchoolDuties> getSchoolDutiesList() {
+        return schoolDutiesList;
+    }
+
+    public void setSchoolDutiesList(List<SchoolDuties> schoolDutiesList) {
+        this.schoolDutiesList = schoolDutiesList;
     }
 }

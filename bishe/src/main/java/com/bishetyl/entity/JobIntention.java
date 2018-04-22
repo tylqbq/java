@@ -3,24 +3,25 @@ package com.bishetyl.entity;
 import java.util.List;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21. ÇóÖ°ÒâÏò
+ * Created by æ±¤ç‰é¾™ on 2018/3/21. ç®€å† æ±‚èŒæ„å‘
  */
 public class JobIntention {
     private  int id;
-    private  float salary;
-    private  String workPlace;
-    private  String function; //Ö°ÄÜ
-    private  String position;//Ö°Î»
-    private  String industry;//ĞĞÒµ
-    private  List<String> industryLabel;//ĞĞÒµ±êÇ© ¶à¸ö ÔÚÊı¾İ¿âÖĞ´æÎª×Ö·û´® ÒÔ,·Ö¸ô(Ó¢ÎÄ¶ººÅ)
-    private  String introduction;//×ÔÎÒ½éÉÜ
+    private  String  salary;//è–ªèµ„
+    private  String workPlace;//å·¥ä½œåœ°ç‚¹
+    private  String function; //èŒèƒ½
+    private  String position;//èŒä½
+    private  String industry;//è¡Œä¸š
+    private  String industryLabel;//æ ‡ç­¾
+    private  String introduction;//è‡ªæˆ‘ è¯„ä»·
+    private  String workType;//å·¥ä½œç±»å‹
     private  int resumeId;
 
-    public float getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
@@ -64,11 +65,11 @@ public class JobIntention {
         this.industry = industry;
     }
 
-    public List<String> getIndustryLabel() {
+    public String getIndustryLabel() {
         return industryLabel;
     }
 
-    public void setIndustryLabel(List<String> industryLabel) {
+    public void setIndustryLabel(String industryLabel) {
         this.industryLabel = industryLabel;
     }
 
@@ -78,6 +79,14 @@ public class JobIntention {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
     }
 
     public int getResumeId() {

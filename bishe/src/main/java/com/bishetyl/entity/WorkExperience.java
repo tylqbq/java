@@ -1,18 +1,20 @@
 package com.bishetyl.entity;
 
 /**
- * Created by ÌÀÓñÁú on 2018/3/21.
+ * Created by æ±¤ç‰é¾™ on 2018/3/21.  ç®€å† å·¥ä½œç»éªŒ
  */
 public class WorkExperience {
     private int id;
     private String startDate;
     private String endDate;
     private String companyName;
-    private String companyType;//¹«Ë¾ĞÔÖÊ ¹úÆó¡¢ÍâÆóµÈ
-    private String function;//Ö°ÄÜ
-    private String industry;//ĞĞÒµ
-    private String position;//Ö°Î»
-    private String department;//²¿ÃÅ
+    private String companyType;//å…¬å¸ç±»å‹
+    private String function;//èŒèƒ½
+    private String industry;//è¡Œä¸š
+    private String position;//èŒä½
+    private String department;//éƒ¨é—¨
+    private String workDetails;//å·¥ä½œè¯¦æƒ…
+    private String starffNumber;//å‘˜å·¥
     private int resumeId;
 
     public String getStartDate() {
@@ -85,6 +87,22 @@ public class WorkExperience {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getWorkDetails() {
+        return workDetails;
+    }
+
+    public void setWorkDetails(String workDetails) {
+        this.workDetails = workDetails;
+    }
+
+    public String getStarffNumber() {
+        return starffNumber;
+    }
+
+    public void setStarffNumber(String starffNumber) {
+        this.starffNumber = starffNumber;
     }
 
     public int getResumeId() {
