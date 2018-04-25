@@ -25,7 +25,7 @@ public class ProjectExperiencesDao {
     }
 
     //增加
-    public Boolean  addProjectExperience(ProjectExperience projectExperience){
+    public Boolean  addProjectExperience(ProjectExperience projectExperience,int resumeId){
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
@@ -39,7 +39,7 @@ public class ProjectExperiencesDao {
             this.pst.setString(4, projectExperience.getProjectName());
             this.pst.setString(5, projectExperience.getProjectDetails());
             this.pst.setString(6, projectExperience.getDutyDetails());
-            this.pst.setInt(7, projectExperience.getResumeId());
+            this.pst.setInt(7, resumeId);
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -61,6 +61,28 @@ public class ProjectExperiencesDao {
             this.sql = "DELETE FROM projectexperience where id=?";
             this.pst = this.con.prepareStatement(this.sql);
             this.pst.setInt(1,id);
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if(count > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //删除所有ByResumeId
+    public Boolean deleteProjectExperienceByResumeId(int resumeId){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "DELETE FROM projectexperience where resumeId=?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setInt(1,resumeId);
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

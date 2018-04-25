@@ -13,7 +13,13 @@ public class CollectionControllerService {
     public Boolean isExist(int recruitId, int jobSeekerId){
         CollectionRecruitDao collectionRecruitDao = new CollectionRecruitDao();
         Boolean isExist = collectionRecruitDao.isExist(recruitId,jobSeekerId);
+        return isExist;
+    }
 
+    //删除收藏
+    public Boolean deleteRecruitCollection(int recruitId, int jobSeekerId){
+        CollectionRecruitDao collectionRecruitDao = new CollectionRecruitDao();
+        Boolean isExist = collectionRecruitDao.deleteCollectionRecruit(recruitId,jobSeekerId);
         return isExist;
     }
 }

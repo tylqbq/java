@@ -1,9 +1,12 @@
 package com.bishetyl.service;
 
+import com.bishetyl.dao.JobSeekerDao;
 import com.bishetyl.dao.UserDao;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.entity.User;
 import com.bishetyl.util.Result;
+
+import java.security.PublicKey;
 
 /**
  * Created by 汤玉龙 on 2017/12/13.
@@ -68,5 +71,12 @@ public class UserService {
             result.setMessage(ex.getMessage());
             return result;
         }
+    }
+
+    public JobSeeker getUserInfoById(JobSeeker jobSeeker){
+        JobSeeker jobSeekerRet = new JobSeeker();
+        JobSeekerDao jobSeekerDao = new JobSeekerDao();
+        jobSeekerRet = jobSeekerDao.getUserInfo(jobSeeker.getId());
+        return  jobSeekerRet;
     }
 }

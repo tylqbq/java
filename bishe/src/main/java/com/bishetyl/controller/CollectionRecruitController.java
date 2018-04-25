@@ -30,4 +30,21 @@ public class CollectionRecruitController {
         }
         return result;
     }
+
+    //删除简历收藏
+    @RequestMapping("/collection/deleteCollectionRecruit")
+    @ResponseBody
+    public Result deleteCollectionRecruit(@RequestParam(value = "recruitId") int recruitId,@RequestParam(value = "jobSeekerId") int jobSeekerId){
+        result = new Result();
+        CollectionControllerService collectionControllerService = new CollectionControllerService();
+        Boolean isExist= collectionControllerService.deleteRecruitCollection(recruitId, jobSeekerId);
+        if(isExist){
+            result.setStatus(true);
+            result.setData("删除成功");
+        }else{
+            result.setStatus(false);
+            result.setData("删除失败");
+        }
+        return result;
+    }
 }

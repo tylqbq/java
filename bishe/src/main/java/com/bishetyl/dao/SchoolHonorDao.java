@@ -25,7 +25,7 @@ public class SchoolHonorDao {
     }
 
     //增加
-    public Boolean addSchoolHonor(SchoolHonor schoolHonor) {
+    public Boolean addSchoolHonor(SchoolHonor schoolHonor,int resumeId) {
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
@@ -35,7 +35,7 @@ public class SchoolHonorDao {
             this.pst.setString(1, schoolHonor.getStartDate());
             this.pst.setString(2, schoolHonor.getPrizeName());
             this.pst.setString(3, schoolHonor.getLevel());
-            this.pst.setInt(4, schoolHonor.getResumeId());
+            this.pst.setInt(4, resumeId);
             count = this.pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,18 +71,40 @@ public class SchoolHonorDao {
         }
     }
 
+    //删除By ResumeId
+    public Boolean deleteSchoolHonorByResumeId(int resumeId) {
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "DELETE FROM schoolhonor where resumeId=?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setInt(1, resumeId);
+            count = this.pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //修改
     public Boolean updateSchoolHonor(SchoolHonor schoolHonor) {
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
             this.con = jdbcUtil.getConnection();
-            this.sql = "UPDATE schoolhonor set startDate=?,prizeName=?,level=? WHERE resumeId=?";
+            this.sql = "UPDATE schoolhonor set startDate=?,prizeName=?,level=? WHERE id=?";
             this.pst = this.con.prepareStatement(this.sql);
             this.pst.setString(1, schoolHonor.getStartDate());
             this.pst.setString(2, schoolHonor.getPrizeName());
             this.pst.setString(3, schoolHonor.getLevel());
-            this.pst.setInt(4, schoolHonor.getResumeId());
+            this.pst.setInt(4, schoolHonor.getId());
             count = this.pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

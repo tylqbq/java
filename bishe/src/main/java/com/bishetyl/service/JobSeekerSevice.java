@@ -87,4 +87,11 @@ public class JobSeekerSevice {
             return result;
         }
     }
+
+    public JobSeeker getUserInfoById(JobSeeker jobSeeker){
+        JobSeeker jobSeekerRet = new JobSeeker();
+        JobSeekerDao jobSeekerDao = new JobSeekerDao();
+        jobSeekerRet = jobSeekerDao.getUserInfo(jobSeeker.getId());
+        return  jobSeekerRet;
+    }
  }

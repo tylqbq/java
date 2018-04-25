@@ -13,7 +13,9 @@ public class Resume {
     private String phoneNumber;//电话
     private String email;//邮箱
     private String address;//居住地址
-    private String  annualIncome;//目前年收入
+    private String annualIncome;//目前年收入
+    private String dilivery;//快速投递
+    private int jobSeekerId;
     private int isPublic;  //是否公开
     private int browsingTimes;//浏览次数
 
@@ -88,6 +90,22 @@ public class Resume {
 
     public void setAnnualIncome(String annualIncome) {
         this.annualIncome = annualIncome;
+    }
+
+    public String getDilivery() {
+        return dilivery;
+    }
+
+    public void setDilivery(String dilivery) {
+        this.dilivery = dilivery;
+    }
+
+    public int getJobSeekerId() {
+        return jobSeekerId;
+    }
+
+    public void setJobSeekerId(int jobSeekerId) {
+        this.jobSeekerId = jobSeekerId;
     }
 
     public int getIsPublic() {

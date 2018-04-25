@@ -10,6 +10,7 @@ public class JobSeeker {
     private  String  phoneNumber;
     private  String  sex;
     private  String  email;
+    private  String  brithDate;
 
     public int getId() {
         return id;
@@ -59,4 +60,11 @@ public class JobSeeker {
         this.email = email;
     }
 
+    public String getBrithDate() {
+        return brithDate;
+    }
+
+    public void setBrithDate(String brithDate) {
+        this.brithDate = brithDate;
+    }
 }

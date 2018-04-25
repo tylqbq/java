@@ -86,4 +86,14 @@ public class LoginController {
         }
         return result;
     }
+
+    @RequestMapping("user/getUserInfoById")
+    @ResponseBody
+    public Result getUserInfoById(@RequestBody  JobSeeker jobSeeker){
+        result = new Result();
+        JobSeekerSevice jobSeekerSevice = new JobSeekerSevice();
+        JobSeeker jobSeekerRet =jobSeekerSevice.getUserInfoById(jobSeeker);
+        result.setData(jobSeekerRet);
+        return result;
+    }
 }

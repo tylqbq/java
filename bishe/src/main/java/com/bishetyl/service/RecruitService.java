@@ -5,6 +5,8 @@ import com.bishetyl.dao.RecruitDao;
 import com.bishetyl.dto.RecruitResult;
 import com.bishetyl.dto.RecruitSearchByCoIDParams;
 import com.bishetyl.dto.RecruitSearchParams;
+import com.bishetyl.entity.CollectionRecruit;
+import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.PageParams;
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -70,6 +72,21 @@ public class RecruitService {
         return "错误";
     }
 
+    //得到 收藏的职位By id
+    public List<Recruit> getMyCollectionRecruits(JobSeeker jobSeeker){
+        List<Recruit> recruitList = new ArrayList<Recruit>();
 
+        CollectionRecruitDao  collectionRecruitDao = new CollectionRecruitDao();
+        List<CollectionRecruit> collectionRecruitList = new ArrayList<CollectionRecruit>();
+        collectionRecruitList = collectionRecruitDao.getMyCollectionRecruits(jobSeeker.getId());
 
+        RecruitDao recruitDao = new RecruitDao();
+
+        for(int i=0;i<collectionRecruitList.size();i++){
+            Recruit recruit = new Recruit();
+            recruit = recruitDao.getRecruitById(collectionRecruitList.get(i).getRecruitId());
+            recruitList.add(recruit);
+        }
+        return recruitList;
+    }
 }

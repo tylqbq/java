@@ -1,5 +1,6 @@
 package com.bishetyl.dao;
 
+import com.bishetyl.entity.Resume;
 import com.bishetyl.entity.SchoolDuties;
 import com.bishetyl.entity.SchoolHonor;
 import com.bishetyl.util.JdbcUtil;
@@ -25,7 +26,7 @@ public class SchoolDutiesDao {
     }
 
     //增加
-    public Boolean addSchoolDuties(SchoolDuties schoolDuties) {
+    public Boolean addSchoolDuties(SchoolDuties schoolDuties,int resumeId) {
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
@@ -35,8 +36,8 @@ public class SchoolDutiesDao {
             this.pst.setString(1, schoolDuties.getStartDate());
             this.pst.setString(2, schoolDuties.getEndDate());
             this.pst.setString(3, schoolDuties.getName());
-            this.pst.setString(3, schoolDuties.getDetails());
-            this.pst.setInt(4, schoolDuties.getResumeId());
+            this.pst.setString(4, schoolDuties.getDetails());
+            this.pst.setInt(5, resumeId);
             count = this.pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,19 +73,15 @@ public class SchoolDutiesDao {
         }
     }
 
-    //修改
-    public Boolean updateSchoolDuties(SchoolDuties schoolDuties) {
+    //删除ByResumeId
+    public Boolean deleteSchoolDutiesByResumeId(int resumeId) {
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
             this.con = jdbcUtil.getConnection();
-            this.sql = "UPDATE schoolduties set startDate=?,endDate=?,name=?,details=? where resumeId=?";
+            this.sql = "DELETE FROM schoolduties where resumeId=?";
             this.pst = this.con.prepareStatement(this.sql);
-            this.pst.setString(1, schoolDuties.getStartDate());
-            this.pst.setString(2, schoolDuties.getEndDate());
-            this.pst.setString(3, schoolDuties.getName());
-            this.pst.setString(4, schoolDuties.getDetails());
-            this.pst.setInt(5, schoolDuties.getResumeId());
+            this.pst.setInt(1, resumeId);
             count = this.pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,6 +94,33 @@ public class SchoolDutiesDao {
             return false;
         }
     }
+
+    //修改
+    public Boolean updateSchoolDuties(SchoolDuties schoolDuties) {
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "UPDATE schoolduties set startDate=?,endDate=?,name=?,details=? where id=?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setString(1, schoolDuties.getStartDate());
+            this.pst.setString(2, schoolDuties.getEndDate());
+            this.pst.setString(3, schoolDuties.getName());
+            this.pst.setString(4, schoolDuties.getDetails());
+            this.pst.setInt(5, schoolDuties.getId());
+            count = this.pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     //查找ById
     public SchoolDuties searchSchoolDuties(int id) {

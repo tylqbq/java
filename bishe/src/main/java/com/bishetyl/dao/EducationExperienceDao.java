@@ -23,7 +23,7 @@ public class EducationExperienceDao {
 
     }
     //增加
-    public Boolean  addEducationExperience(EducationExperience educationExperience){
+    public Boolean  addEducationExperience(EducationExperience educationExperience,int resumeId){
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
@@ -37,7 +37,7 @@ public class EducationExperienceDao {
             this.pst.setString(4, educationExperience.getSchool());
             this.pst.setString(5, educationExperience.getProfession());
             this.pst.setString(6, educationExperience.getDetails());
-            this.pst.setInt(7, educationExperience.getResumeId());
+            this.pst.setInt(7, resumeId);
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -71,6 +71,27 @@ public class EducationExperienceDao {
             return false;
         }
     }
+    //删除By ResumeID
+    public Boolean deleteEducationExperienceByResumeId(int ResumeID){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "DELETE FROM educationalexperience where ResumeID=?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setInt(1,ResumeID);
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if(count > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     //修改
     public Boolean updateEducationExperience(EducationExperience educationExperience){
@@ -79,7 +100,7 @@ public class EducationExperienceDao {
         try {
             this.con = jdbcUtil.getConnection();
             this.sql = "UPDATE educationalexperience SET startDate=?,endDate=?,education=?,school=?,profession=?,details=?\n" +
-                    "where resumeId = ?";
+                    "where id = ?";
             this.pst = this.con.prepareStatement(this.sql);
             this.pst.setString(1, educationExperience.getStartDate());
             this.pst.setString(2,educationExperience.getEndDate());
@@ -87,7 +108,7 @@ public class EducationExperienceDao {
             this.pst.setString(4,educationExperience.getSchool());
             this.pst.setString(5,educationExperience.getProfession());
             this.pst.setString(6,educationExperience.getDetails());
-            this.pst.setInt(7, educationExperience.getResumeId());
+            this.pst.setInt(7, educationExperience.getId());
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

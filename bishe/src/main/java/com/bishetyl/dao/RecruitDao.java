@@ -208,6 +208,7 @@ public class RecruitDao {
                 recruit.setWorkType(this.rs.getString("workType"));
                 recruit.setPublishDate(this.rs.getString("publishDate"));
                 recruit.setCompanyId(this.rs.getInt("companyId"));
+                recruit.setCompanyName(this.rs.getString("companyName"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -281,8 +282,8 @@ public class RecruitDao {
             this.con = jdbcUtil.getConnection();
             String sql = "INSERT INTO collectionrecruit (jobSeekerId,recruitId,collectionTime) VALUES (?,?,?) ";
             this.pst = this.con.prepareStatement(sql);
-            this.pst.setInt(1, recruitId);
-            this.pst.setInt(2, jobSeekerId);
+            this.pst.setInt(1, jobSeekerId);
+            this.pst.setInt(2, recruitId);
             this.pst.setString(3,collectionTime);
             int count = this.pst.executeUpdate();
             if(count >0 ){

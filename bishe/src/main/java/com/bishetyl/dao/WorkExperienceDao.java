@@ -24,7 +24,7 @@ public class WorkExperienceDao {
 
     }
     //增加
-    public Boolean  addWorkExperience(WorkExperience workExperience){
+    public Boolean  addWorkExperience(WorkExperience workExperience,int resumeId){
         JdbcUtil jdbcUtil = new JdbcUtil();
         int count = 0;
         try {
@@ -42,7 +42,7 @@ public class WorkExperienceDao {
             this.pst.setString(8, workExperience.getDepartment());
             this.pst.setString(9, workExperience.getWorkDetails());
             this.pst.setString(10, workExperience.getStarffNumber());
-            this.pst.setInt(11, workExperience.getResumeId());
+            this.pst.setInt(11, resumeId);
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
@@ -76,6 +76,27 @@ public class WorkExperienceDao {
             return false;
         }
     }
+    //删除工作经验ByResumeId
+    public Boolean deleteWorkExperienceByResumeId(int resumeId){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "DELETE FROM workexperience where resumeId=?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setInt(1,resumeId);
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if(count > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     //修改
     public Boolean updateWorkExperience(WorkExperience workExperience){
@@ -84,7 +105,7 @@ public class WorkExperienceDao {
         try {
             this.con = jdbcUtil.getConnection();
             this.sql = "UPDATE workexperience  set startDate=?,endDate=?,companyName=?,companyType=?,function=?,industry=?,position=?,\n" +
-                    "department?,workDetails=?,starffNumber=? WHERE  id=?";
+                    "department=?,workDetails=?,starffNumber=? WHERE  id=?";
             this.pst = this.con.prepareStatement(this.sql);
             this.pst.setString(1, workExperience.getStartDate());
             this.pst.setString(2,workExperience.getEndDate());
@@ -157,7 +178,7 @@ public class WorkExperienceDao {
                 workExperience.setStartDate(this.rs.getString("startDate"));
                 workExperience.setEndDate(this.rs.getString("endDate"));
                 workExperience.setCompanyName(this.rs.getString("companyName"));
-                workExperience.setCompanyType(this.rs.getString("resumeId"));
+                workExperience.setCompanyType(this.rs.getString("companyType"));
                 workExperience.setFunction(this.rs.getString("function"));
                 workExperience.setIndustry(this.rs.getString("industry"));
                 workExperience.setPosition(this.rs.getString("position"));

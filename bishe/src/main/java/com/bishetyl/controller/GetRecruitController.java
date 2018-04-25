@@ -67,4 +67,16 @@ public class GetRecruitController {
         result.setData(info);
         return  result;
     }
+    //得到我的收藏
+    @RequestMapping("/recruit/getMyCollectionRecruits")
+    @ResponseBody
+    public Result getMyCollectionRecruits(@RequestBody JobSeeker jobSeeker){
+        result = new Result();
+        List<Recruit> recruitList = new ArrayList<Recruit>();
+        RecruitService recruitService = new RecruitService();
+        recruitList = recruitService.getMyCollectionRecruits(jobSeeker);
+        result.setData(recruitList);
+        return  result;
+    }
+
 }
