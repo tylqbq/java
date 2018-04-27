@@ -1,6 +1,7 @@
 package com.bishetyl.dao;
 
 import com.bishetyl.entity.Company;
+import com.bishetyl.entity.CompanyUser;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.JdbcUtil;
 
@@ -21,6 +22,42 @@ public class CompanyDao {
     private String sql = null;
     public CompanyDao(){
 
+    }
+
+
+
+    public int registerCompany(Company company){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        int rowID = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="INSERT INTO company(companyName,companyType,staffNumber,companyInfo" +
+                    ",companyBusiness,companyAddress,businessLicense)VALUES(?,?,?,?,?,?,?)";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, company.getCompanyName());
+            this.pst.setString(2, company.getCompanyType());
+            this.pst.setString(3, company.getStaffNumber());
+            this.pst.setString(4, company.getCompanyInfo());
+            this.pst.setString(5, company.getCompanyBusiness());
+            this.pst.setString(6, company.getCompanyAddress());
+            this.pst.setString(7, company.getBusinessLicense());
+            count = this.pst.executeUpdate();
+            if (count > 0){
+                //取得插入行的id  新建简历的id
+                String idSql = "SELECT LAST_INSERT_ID()";
+                this.pst = this.con.prepareStatement(idSql);
+                this.rs = this.pst.executeQuery();
+                while (this.rs.next()){
+                    rowID = this.rs.getInt("LAST_INSERT_ID()");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return rowID;
     }
 
     public Company getCompanyInfoById(int companyId){

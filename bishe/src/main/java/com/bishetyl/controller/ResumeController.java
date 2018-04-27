@@ -283,6 +283,23 @@ public class ResumeController {
         return result;
     }
 
+    @RequestMapping("/resume/deleteDiliveryResume")
+    @ResponseBody
+    @Log(title = "删除投递简历")
+    public Result deleteDiliveryResume(@RequestBody DeliveryResume deliveryResume){
+        Result result = new Result();
+        ResumeService resumeService = new ResumeService();
+        Boolean  isScuess = resumeService.deleteDiliveryResume(deliveryResume);
+        if (isScuess){
+            result.setStatus(true);
+            result.setData("删除成功");
+        }else{
+            result.setStatus(false);
+            result.setData("删除失败");
+        }
+        return result;
+    }
+
     @RequestMapping("/resume/getDeliveryResume")
     @ResponseBody
     @Log(title = "查询自己投递的简历")

@@ -104,4 +104,29 @@ public class DeliveruResumeDao {
         }
         return deliveryResumeList;
     }
+
+    //删除投递简历
+    public Boolean deleteDiliveryResume(DeliveryResume deliveryResume){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        Resume resume = null;
+        int count=0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "DELETE FROM deliveryresume WHERE id=? ";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setInt(1,deliveryResume.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if(count > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
 }

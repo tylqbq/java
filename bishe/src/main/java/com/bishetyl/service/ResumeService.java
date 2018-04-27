@@ -275,6 +275,13 @@ public class ResumeService {
             return true;
         }
     }
+    //删除投递简历
+    public Boolean deleteDiliveryResume(DeliveryResume deliveryResume){
+        DeliveruResumeDao deliveruResumeDao = new DeliveruResumeDao();
+        Boolean isScuess = deliveruResumeDao.deleteDiliveryResume(deliveryResume);
+        return isScuess;
+    }
+
 
     //查询投递的简历
     public List<DeliveryResumeResult> getDeliveryResume(JobSeeker jobSeeker){

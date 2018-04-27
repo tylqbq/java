@@ -4175,6 +4175,12 @@
       <primary-key name="PRIMARY" columns="CountryCode,Language"/>
       <foreign-key name="countryLanguage_ibfk_1" columns="CountryCode" ref-table="country" ref-schema="" ref-catalog="world" ref-columns="Code" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
+    <table name="businesslicense" schema="" catalog="yulongrecruit" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="url" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="companyId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="city" schema="" catalog="yulongrecruit" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="cityName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
@@ -4185,7 +4191,7 @@
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="jobSeekerId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="recruitId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="collectionTime" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn" version="true"/>
+      <column name="collectionTime" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" def="JzAwMDAtMDAtMDAn"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="company" schema="" catalog="yulongrecruit" type="TABLE">
@@ -4196,14 +4202,27 @@
       <column name="companyInfo" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="companyBusiness" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="companyAddress" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="businessLicense" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" remarks="6JCl5Lia5Yi26YCg"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="companyuser" schema="" catalog="yulongrecruit" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="member" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" remarks="5Lya5ZGY5ZCN"/>
+      <column name="userName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="phoneNumber" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="companyId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="examinePass" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ==" remarks="MCDmnKrpgJrov4cgIDHlrqHmoLjkuK0gIDLpgJrov4c="/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="deliveryresume" schema="" catalog="yulongrecruit" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="jobSeekerId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="resumeId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="recruitId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="deliveryTime" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93" version="true"/>
-      <column name="isBrowse" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="deliveryTime" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="isBrowse" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="educationalexperience" schema="" catalog="yulongrecruit" type="TABLE">
@@ -4289,8 +4308,9 @@
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="annualIncome" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="isPublic" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="browsingTimes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="dilivery" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="JzAn" remarks="ZmFsc2U="/>
+      <column name="isPublic" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA==" remarks="MCDlrozlhajkv53lr4YgIDHlr7nnjonpvpnlhazlvIAgIDLlr7nmiYDmnInlhazlvIA="/>
+      <column name="browsingTimes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="jobSeekerId" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
