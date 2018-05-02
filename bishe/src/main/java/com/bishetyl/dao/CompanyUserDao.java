@@ -1,7 +1,9 @@
 package com.bishetyl.dao;
 
+import com.bishetyl.dto.ChangePassWordParams;
 import com.bishetyl.entity.CompanyUser;
 import com.bishetyl.util.JdbcUtil;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,12 +62,13 @@ public class CompanyUserDao {
             this.con = jdbcUtil.getConnection();
             String sql ="SELECT * FROM companyuser WHERE id=?";
             this.pst = this.con.prepareStatement(sql);
-            this.pst.setInt(1,id);
+            this.pst.setInt(1, id);
             this.rs = this.pst.executeQuery();
             while (this.rs.next()){
                 companyUser.setId(this.rs.getInt("id"));
                 companyUser.setMember(this.rs.getString("member"));
                 companyUser.setUserName(this.rs.getString("userName"));
+                companyUser.setPassword(this.rs.getString("password"));
                 companyUser.setPhoneNumber(this.rs.getString("phoneNumber"));
                 companyUser.setEmail(this.rs.getString("email"));
                 companyUser.setCompanyId(this.rs.getInt("companyId"));
@@ -78,4 +81,154 @@ public class CompanyUserDao {
         }
         return companyUser;
     }
+
+    public CompanyUser login(CompanyUser companyUser){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        CompanyUser companyUserRet = null;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="SELECT * FROM companyuser WHERE userName=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, companyUser.getUserName());
+            this.rs = this.pst.executeQuery();
+            while (this.rs.next()){
+                companyUserRet = new CompanyUser();
+                companyUserRet.setId(this.rs.getInt("id"));
+                companyUserRet.setMember(this.rs.getString("member"));
+                companyUserRet.setUserName(this.rs.getString("userName"));
+                companyUserRet.setPassword(this.rs.getString("password"));
+                companyUserRet.setPhoneNumber(this.rs.getString("phoneNumber"));
+                companyUserRet.setEmail(this.rs.getString("email"));
+                companyUserRet.setCompanyId(this.rs.getInt("companyId"));
+                companyUserRet.setExaminePass(this.rs.getInt("examinePass"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return companyUserRet;
+    }
+
+    public CompanyUser getCompanyUserInfo(CompanyUser companyUser){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        CompanyUser companyUserRet = null;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="SELECT * FROM companyuser WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, companyUser.getId());
+            this.rs = this.pst.executeQuery();
+            while (this.rs.next()){
+                companyUserRet = new CompanyUser();
+                companyUserRet.setId(this.rs.getInt("id"));
+                companyUserRet.setMember(this.rs.getString("member"));
+                companyUserRet.setUserName(this.rs.getString("userName"));
+                companyUserRet.setPhoneNumber(this.rs.getString("phoneNumber"));
+                companyUserRet.setEmail(this.rs.getString("email"));
+                companyUserRet.setCompanyId(this.rs.getInt("companyId"));
+                companyUserRet.setExaminePass(this.rs.getInt("examinePass"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return companyUserRet;
+    }
+
+    //注册公司用户
+    public Boolean updateMember(CompanyUser companyUser){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="UPDATE companyuser set member=? WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, companyUser.getMember());
+            this.pst.setInt(2, companyUser.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //修改密码
+    public Boolean updatePassword(ChangePassWordParams changePassWordParams){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="UPDATE companyuser set password=? WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, changePassWordParams.getNewPassword());
+            this.pst.setInt(2, changePassWordParams.getCompanyUserId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //修改手机
+    public Boolean updatePhoneNumber(CompanyUser companyUser){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="UPDATE companyuser set phoneNumber=? WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, companyUser.getPhoneNumber());
+            this.pst.setInt(2, companyUser.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //修改邮箱
+    public Boolean updateEmail(CompanyUser companyUser){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="UPDATE companyuser set email=? WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, companyUser.getEmail());
+            this.pst.setInt(2, companyUser.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+
 }

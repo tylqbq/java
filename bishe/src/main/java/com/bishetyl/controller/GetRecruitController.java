@@ -23,6 +23,7 @@ import java.util.List;
 @ResponseBody
 public class GetRecruitController {
     Result result = null;
+
     @RequestMapping("/recruit/getrecruit")
     @ResponseBody
     public Result getRecruit(@RequestBody RecruitSearchParams searchParams){
@@ -78,5 +79,42 @@ public class GetRecruitController {
         result.setData(recruitList);
         return  result;
     }
+
+    //发布招聘职位
+    @RequestMapping("/recruit/buildRecruit")
+    @ResponseBody
+    public Result buildRecruit(@RequestBody Recruit recruit){
+        result = new Result();
+        RecruitService recruitService = new RecruitService();
+        Boolean isScuess = recruitService.buildRecruit(recruit);
+        if (isScuess){
+            result.setStatus(true);
+            result.setData("发布成功");
+        }else{
+            result.setStatus(false);
+            result.setData("发布失败");
+        }
+        return  result;
+    }
+
+    //删除招聘职位
+    @RequestMapping("/recruit/deleteRecruitById")
+    @ResponseBody
+    public Result deleteRecruitById(@RequestBody Recruit recruit){
+        result = new Result();
+        RecruitService recruitService = new RecruitService();
+        Boolean isScuess = recruitService.deleteRecruitById(recruit);
+        if (isScuess){
+            result.setStatus(true);
+            result.setData("删除成功");
+        }else{
+            result.setStatus(false);
+            result.setData("删除失败");
+        }
+        return  result;
+    }
+
+
+
 
 }

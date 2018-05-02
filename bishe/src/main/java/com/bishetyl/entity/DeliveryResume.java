@@ -8,6 +8,7 @@ public class DeliveryResume {
     private int jobSeekerId;//求职者id
     private int resumeId;//简历id
     private int recruitId;//招聘id
+    private int companyId;//公司id
     private String deliveryTime;//投递时间
     private int isBrowse;//是否被浏览
 
@@ -41,6 +42,14 @@ public class DeliveryResume {
 
     public void setRecruitId(int recruitId) {
         this.recruitId = recruitId;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getDeliveryTime() {

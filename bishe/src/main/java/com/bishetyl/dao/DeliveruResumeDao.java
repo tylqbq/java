@@ -56,13 +56,14 @@ public class DeliveruResumeDao {
         int count=0;
         try {
             this.con = jdbcUtil.getConnection();
-            this.sql = "INSERT into deliveryresume(jobSeekerId,resumeId,recruitId,deliveryTime) \n" +
-                    "VALUES (?,?,?,?)";
+            this.sql = "INSERT into deliveryresume(jobSeekerId,resumeId,recruitId,companyId,deliveryTime) \n" +
+                    "VALUES (?,?,?,?,?)";
             this.pst = this.con.prepareStatement(this.sql);
             this.pst.setInt(1,deliveryResume.getJobSeekerId());
             this.pst.setInt(2,deliveryResume.getResumeId());
             this.pst.setInt(3,deliveryResume.getRecruitId());
-            this.pst.setString(4, deliveryResume.getDeliveryTime());
+            this.pst.setInt(4, deliveryResume.getCompanyId());
+            this.pst.setString(5, deliveryResume.getDeliveryTime());
             count = this.pst.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

@@ -1,8 +1,6 @@
 package com.bishetyl.dao;
 
-import com.bishetyl.entity.Company;
-import com.bishetyl.entity.CompanyUser;
-import com.bishetyl.entity.Recruit;
+import com.bishetyl.entity.*;
 import com.bishetyl.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -106,5 +104,60 @@ public class CompanyDao {
             jdbcUtil.releaseConnection(this.con);
         }
         return company;
+    }
+
+    public Boolean updateCompanyInfo(Company company){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql ="UPDATE company SET companyName=?,companyType=?,staffNumber=?,companyInfo=?,\n" +
+                    "companyBusiness=?,companyAddress=? WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, company.getCompanyName());
+            this.pst.setString(2, company.getCompanyType());
+            this.pst.setString(3, company.getStaffNumber());
+            this.pst.setString(4, company.getCompanyInfo());
+            this.pst.setString(5, company.getCompanyBusiness());
+            this.pst.setString(6, company.getCompanyAddress());
+            this.pst.setInt(7, company.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public List<DeliveryResume> getDeliveryResume(Company company){
+        List<DeliveryResume> deliveryResumeList = new ArrayList<DeliveryResume>();
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "select * from deliveryresume where companyId = ? AND isBrowse=0";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, company.getId());
+            this.rs = this.pst.executeQuery();
+            while(this.rs.next()){
+                DeliveryResume deliveryResume = new DeliveryResume();
+                deliveryResume.setId(this.rs.getInt("id"));
+                deliveryResume.setJobSeekerId(this.rs.getInt("jobSeekerId"));
+                deliveryResume.setResumeId(this.rs.getInt("resumeId"));
+                deliveryResume.setRecruitId(this.rs.getInt("recruitId"));
+                deliveryResume.setCompanyId(this.rs.getInt("companyId"));
+                deliveryResume.setDeliveryTime(this.rs.getString("deliveryTime"));
+                deliveryResumeList.add(deliveryResume);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return deliveryResumeList;
     }
 }

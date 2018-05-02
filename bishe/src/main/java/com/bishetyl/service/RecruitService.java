@@ -13,6 +13,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.PublicKey;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,5 +89,19 @@ public class RecruitService {
             recruitList.add(recruit);
         }
         return recruitList;
+    }
+
+    //发布职位
+    public Boolean buildRecruit(Recruit recruit){
+        RecruitDao recruitDao = new RecruitDao();
+        Boolean isScuess = recruitDao.buildRecruit(recruit);
+        return isScuess;
+    }
+
+    //删除发布职位
+    public Boolean deleteRecruitById(Recruit recruit){
+        RecruitDao recruitDao = new RecruitDao();
+        Boolean isScuess = recruitDao.deleteRecruitById(recruit);
+        return isScuess;
     }
 }

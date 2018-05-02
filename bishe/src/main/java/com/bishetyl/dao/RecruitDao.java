@@ -6,6 +6,7 @@ import com.bishetyl.dto.RecruitSearchParams;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.JdbcUtil;
 import com.bishetyl.util.PageParams;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -295,5 +296,59 @@ public class RecruitDao {
             jdbcUtil.releaseConnection(this.con);
         }
         return false;
+    }
+    //发布职位
+    public Boolean buildRecruit(Recruit recruit){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "INSERT INTO recruit(positionName,workPlace,salaryRange,recruitsNumber,positionInfo,contactWay,\n" +
+                    "workTime,education,workType,publishDate,companyId)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setString(1, recruit.getPositionName());
+            this.pst.setString(2, recruit.getWorkPlace());
+            this.pst.setString(3, recruit.getSalaryRange());
+            this.pst.setString(4, recruit.getRecruitsNumber());
+            this.pst.setString(5, recruit.getPositionInfo());
+            this.pst.setString(6, recruit.getContactWay());
+            this.pst.setString(7, recruit.getWorkTime());
+            this.pst.setString(8, recruit.getEducation());
+            this.pst.setString(9, recruit.getWorkType());
+            this.pst.setString(10, recruit.getPublishDate());
+            this.pst.setInt(11, recruit.getCompanyId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //删除职位
+    public Boolean deleteRecruitById(Recruit recruit){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        int count = 0;
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "DELETE  FROM recruit WHERE id=?";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, recruit.getId());
+            count = this.pst.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        if (count>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

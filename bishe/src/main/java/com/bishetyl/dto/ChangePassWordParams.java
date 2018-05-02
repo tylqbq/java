@@ -7,6 +7,7 @@ public class ChangePassWordParams {
     private String oldPassword;
     private String newPassword;
     private int jobSeekerId;
+    private int companyUserId;
 
     public String getNewPassword() {
         return newPassword;
@@ -30,5 +31,13 @@ public class ChangePassWordParams {
 
     public void setJobSeekerId(int jobSeekerId) {
         this.jobSeekerId = jobSeekerId;
+    }
+
+    public int getCompanyUserId() {
+        return companyUserId;
+    }
+
+    public void setCompanyUserId(int companyUserId) {
+        this.companyUserId = companyUserId;
     }
 }
