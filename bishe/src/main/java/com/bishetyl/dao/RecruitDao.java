@@ -27,7 +27,7 @@ public class RecruitDao {
     public RecruitDao(){
 
     }
-
+    //综合查询
     public RecruitResult getRecruit(RecruitSearchParams recruitSearchParams){
         RecruitResult recruitResult = new RecruitResult();
         List <Recruit> recruitList = new ArrayList<Recruit>();

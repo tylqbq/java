@@ -3,6 +3,8 @@ package com.bishetyl.controller;
 import com.bishetyl.dao.RecruitDao;
 import com.bishetyl.dao.ResumeDao;
 import com.bishetyl.dto.DeliveryResumeResult;
+import com.bishetyl.dto.ResumeListResult;
+import com.bishetyl.dto.ResumeSearchParam;
 import com.bishetyl.entity.*;
 import com.bishetyl.service.ResumeService;
 import com.bishetyl.util.Log;
@@ -311,6 +313,22 @@ public class ResumeController {
         result.setData(deliveryResumeResults);
         return result;
     }
+
+    @RequestMapping("/resume/searchResume")
+    @ResponseBody
+    @Log(title = "简历综合搜索")
+    public Result searchResume(@RequestBody ResumeSearchParam resumeSearchParam){
+        Result result = new Result();
+        ResumeListResult resumeListResult = new ResumeListResult();
+        ResumeService resumeService = new ResumeService();
+        resumeListResult = resumeService.searchResume(resumeSearchParam);
+        result.setData(resumeListResult);
+        return result;
+    }
+
+
+
+
 
 
 

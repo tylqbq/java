@@ -2,6 +2,8 @@ package com.bishetyl.service;
 
 import com.bishetyl.dao.*;
 import com.bishetyl.dto.DeliveryResumeResult;
+import com.bishetyl.dto.ResumeListResult;
+import com.bishetyl.dto.ResumeSearchParam;
 import com.bishetyl.entity.*;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
@@ -328,11 +330,18 @@ public class ResumeService {
 
 
 
-//    //新建求职意向
-//    public JobIntention addJobIntention(JobIntention jobIntention){
-//        JobIntentionDao jobIntentionDao = new JobIntentionDao();
-//        JobIntention jobIntentionRet = new JobIntention();
-//        jobIntentionRet = jobIntentionDao.addJobIntention(jobIntention);
-//        return jobIntentionRet;
-//    }
+    //新建求职意向
+    public ResumeListResult searchResume( ResumeSearchParam resumeSearchParam){
+        EducationExperienceDao educationExperienceDao = new EducationExperienceDao();
+        JobIntentionDao jobIntentionDao = new JobIntentionDao();
+        ResumeListResult resumeListResult = new ResumeListResult();
+        resumeListResult = jobIntentionDao.searchResume(resumeSearchParam);
+        for(int i=0;i<resumeListResult.getResumeList().size();i++){
+            List<JobIntention> jobIntentionList = jobIntentionDao.searchJobIntentionByResumeId(resumeListResult.getResumeList().get(i).getId());
+            EducationExperience educationExperience = educationExperienceDao.searchEducationExperienceByResumeId(resumeListResult.getResumeList().get(i).getId());
+            resumeListResult.getResumeList().get(i).setJobIntention(jobIntentionList.get(0));
+            resumeListResult.getResumeList().get(i).setEducationExperience(educationExperience);
+        }
+        return resumeListResult;
+    }
 }
