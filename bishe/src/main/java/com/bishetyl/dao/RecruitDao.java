@@ -6,6 +6,7 @@ import com.bishetyl.dto.RecruitSearchParams;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.JdbcUtil;
 import com.bishetyl.util.PageParams;
+import com.sun.javafx.font.directwrite.RECT;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.lang.reflect.Field;
@@ -219,6 +220,30 @@ public class RecruitDao {
         return recruit;
     }
 
+    public List<Recruit> getRecruitByIndustry(String industry){
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        List<Recruit> recruitList = new ArrayList<Recruit>();
+        try {
+            this.con = jdbcUtil.getConnection();
+            this.sql = "select * from recruit where industry = ?";
+            this.pst = this.con.prepareStatement(this.sql);
+            this.pst.setString(1, industry);
+            this.rs = this.pst.executeQuery();
+            while (this.rs.next()){
+                Recruit recruit = new Recruit();
+                recruit.setId(this.rs.getInt("id"));
+                recruit.setSalaryRange(this.rs.getString("salaryRange"));
+                recruit.setRecruitsNumber(this.rs.getString("recruitsNumber"));
+                recruitList.add(recruit);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return recruitList;
+    }
+
     public RecruitResult getRecruitByCompanyId(RecruitSearchByCoIDParams params){
         List<Recruit> recruitList = new ArrayList<Recruit>();
         JdbcUtil jdbcUtil = new JdbcUtil();
@@ -350,5 +375,74 @@ public class RecruitDao {
         }else{
             return false;
         }
+    }
+
+   public List<Recruit> getRecruitByAddressRandom(Recruit recruit){
+       List<Recruit> recruitList = new ArrayList<Recruit>();
+       JdbcUtil jdbcUtil = new JdbcUtil();
+       try {
+           this.con = jdbcUtil.getConnection();
+           String sql = "SELECT * FROM recruit,company WHERE recruit.id >= ((SELECT MAX(recruit.id) FROM recruit)-(SELECT MIN(recruit.id) \n" +
+                   "FROM recruit)) * RAND() + (SELECT MIN(recruit.id) FROM recruit) and recruit.workPlace like ? and recruit.companyId = company.id LIMIT 5";
+           this.pst = this.con.prepareStatement(sql);
+           this.pst.setString(1, "%" + recruit.getWorkPlace() + "%");
+           this.rs = this.pst.executeQuery();
+           while(this.rs.next()){
+               Recruit recruitRet = new Recruit();
+               recruitRet.setId(this.rs.getInt("id"));
+               recruitRet.setPositionName(this.rs.getString("positionName"));
+               recruitRet.setWorkPlace(this.rs.getString("workPlace"));
+               recruitRet.setSalaryRange(this.rs.getString("salaryRange"));
+               recruitRet.setRecruitsNumber(this.rs.getString("recruitsNumber"));
+               recruitRet.setPositionInfo(this.rs.getString("positionInfo"));
+               recruitRet.setContactWay(this.rs.getString("contactWay"));
+               recruitRet.setWorkTime(this.rs.getString("workTime"));
+               recruitRet.setEducation(this.rs.getString("education"));
+               recruitRet.setWorkType(this.rs.getString("workType"));
+               recruitRet.setPublishDate(this.rs.getString("publishDate"));
+               recruitRet.setCompanyId(this.rs.getInt("companyId"));
+               recruitRet.setCompanyName(this.rs.getString("companyName"));
+               recruitList.add(recruitRet);
+           }
+       }catch (SQLException e){
+           e.printStackTrace();
+       }finally {
+           jdbcUtil.releaseConnection(this.con);
+       }
+       return recruitList;
+   }
+
+    public List<Recruit> getCompanyRecruitByIdRandom(int companyId){
+        List<Recruit> recruitList = new ArrayList<Recruit>();
+        JdbcUtil jdbcUtil = new JdbcUtil();
+        try {
+            this.con = jdbcUtil.getConnection();
+            String sql = "SELECT * FROM recruit WHERE recruit.id >= ((SELECT MAX(recruit.id) FROM recruit)-(SELECT MIN(recruit.id) \n" +
+                    "FROM recruit)) * RAND() + (SELECT MIN(recruit.id) FROM recruit) and recruit.companyId = ? LIMIT 2";
+            this.pst = this.con.prepareStatement(sql);
+            this.pst.setInt(1, companyId);
+            this.rs = this.pst.executeQuery();
+            while(this.rs.next()){
+                Recruit recruitRet = new Recruit();
+                recruitRet.setId(this.rs.getInt("id"));
+                recruitRet.setPositionName(this.rs.getString("positionName"));
+                recruitRet.setWorkPlace(this.rs.getString("workPlace"));
+                recruitRet.setSalaryRange(this.rs.getString("salaryRange"));
+                recruitRet.setRecruitsNumber(this.rs.getString("recruitsNumber"));
+                recruitRet.setPositionInfo(this.rs.getString("positionInfo"));
+                recruitRet.setContactWay(this.rs.getString("contactWay"));
+                recruitRet.setWorkTime(this.rs.getString("workTime"));
+                recruitRet.setEducation(this.rs.getString("education"));
+                recruitRet.setWorkType(this.rs.getString("workType"));
+                recruitRet.setPublishDate(this.rs.getString("publishDate"));
+                recruitRet.setCompanyId(this.rs.getInt("companyId"));
+                recruitList.add(recruitRet);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            jdbcUtil.releaseConnection(this.con);
+        }
+        return recruitList;
     }
 }

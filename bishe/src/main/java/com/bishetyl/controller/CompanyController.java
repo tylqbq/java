@@ -79,51 +79,63 @@ public class CompanyController {
         return result;
     }
 
+    @RequestMapping("/company/getCompanyRecruitRandom")
+    @ResponseBody
+    @Log(title = "根据地区随机获得五个公司的招聘")
+    public Result getCompanyRecruitRandom(@RequestBody Company company){
+        result = new Result();
+        List<Company> CompanyList = new ArrayList<Company>();
+        CompanyService companyService = new CompanyService();
+        CompanyList = companyService.getCompanyRecruitRandom(company);
+        result.setData(CompanyList);
+        return result;
+    }
+
 
 /**
  * 分割线----------------------------------------------------------------------------------
  */
-    @RequestMapping("/company/registerCompany")
-    @ResponseBody
-    @Log(title = "注册公司用户")
-    public Result registerCompany(@RequestBody CompanyRegisterParam companyRegisterParam){
-        result = new Result();
-        CompanyRegisterParam companyRegisterParamRet = new CompanyRegisterParam();
+            @RequestMapping("/company/registerCompany")
+            @ResponseBody
+            @Log(title = "注册公司用户")
+            public Result registerCompany(@RequestBody CompanyRegisterParam companyRegisterParam){
+                result = new Result();
+                CompanyRegisterParam companyRegisterParamRet = new CompanyRegisterParam();
 
-        CompanyService companyService = new CompanyService();
-        companyRegisterParamRet = companyService.registerCompany(companyRegisterParam);
+                CompanyService companyService = new CompanyService();
+                companyRegisterParamRet = companyService.registerCompany(companyRegisterParam);
 
-        result.setData(companyRegisterParamRet);
-        return result;
-    }
+                result.setData(companyRegisterParamRet);
+                return result;
+            }
 
-    @RequestMapping("/company/loginCompany")
-    @ResponseBody
-    @Log(title = "公司用户登录")
-    public Result loginCompany(@RequestBody CompanyUser companyUser){
-        result = new Result();
-        CompanyUser companyUserRet = new CompanyUser();
-        CompanyService companyService = new CompanyService();
-        companyUserRet = companyService.loginCompany(companyUser);
-        if(companyUserRet == null){
-            result.setStatus(false);
-            result.setData("帐号或密码错误");
-        }else {
-            result.setStatus(true);
-            result.setData(companyUserRet);
-        }
-        return result;
-    }
+            @RequestMapping("/company/loginCompany")
+            @ResponseBody
+            @Log(title = "公司用户登录")
+            public Result loginCompany(@RequestBody CompanyUser companyUser){
+                result = new Result();
+                CompanyUser companyUserRet = new CompanyUser();
+                CompanyService companyService = new CompanyService();
+                companyUserRet = companyService.loginCompany(companyUser);
+                if(companyUserRet == null){
+                    result.setStatus(false);
+                    result.setData("帐号或密码错误");
+                }else {
+                    result.setStatus(true);
+                    result.setData(companyUserRet);
+                }
+                return result;
+            }
 
-    @RequestMapping("/company/getCompanyUserInfo")
-    @ResponseBody
-    @Log(title = "公司用户信息获取")
-    public Result getCompanyUserInfo(@RequestBody CompanyUser companyUser){
-        result = new Result();
-        CompanyUser companyUserRet = new CompanyUser();
-        CompanyService companyService = new CompanyService();
-        companyUserRet = companyService.getCompanyUserInfo(companyUser);
-        if(companyUserRet == null){
+            @RequestMapping("/company/getCompanyUserInfo")
+            @ResponseBody
+            @Log(title = "公司用户信息获取")
+            public Result getCompanyUserInfo(@RequestBody CompanyUser companyUser){
+                result = new Result();
+                CompanyUser companyUserRet = new CompanyUser();
+                CompanyService companyService = new CompanyService();
+                companyUserRet = companyService.getCompanyUserInfo(companyUser);
+                if(companyUserRet == null){
             result.setStatus(false);
             result.setData("帐号或密码错误");
         }else {

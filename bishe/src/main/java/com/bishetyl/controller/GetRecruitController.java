@@ -114,7 +114,14 @@ public class GetRecruitController {
         return  result;
     }
 
-
-
-
+    //根据地区随机获得招聘
+    @RequestMapping("/recruit/getRecruitByAddressRandom")
+    @ResponseBody
+    public Result getRecruitByAddressRandom(@RequestBody Recruit recruit){
+        result = new Result();
+        RecruitService recruitService = new RecruitService();
+        List<Recruit> recruitList = recruitService.getRecruitByAddressRandom(recruit);
+        result.setData(recruitList);
+        return  result;
+    }
 }

@@ -14,6 +14,7 @@ public class Company {
     private String companyBusiness;//公司业务
     private String companyAddress;//公司地址
     private String businessLicense;//营业执照
+    private int examinePass;
     private List<Recruit> recruits;// 公司发布的招聘
 
     public int getId() {
@@ -86,5 +87,13 @@ public class Company {
 
     public void setRecruits(List<Recruit> recruits) {
         this.recruits = recruits;
+    }
+
+    public int getExaminePass() {
+        return examinePass;
+    }
+
+    public void setExaminePass(int examinePass) {
+        this.examinePass = examinePass;
     }
 }

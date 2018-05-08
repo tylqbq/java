@@ -10,6 +10,7 @@ import com.bishetyl.dto.CompanyRegisterParam;
 import com.bishetyl.entity.*;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.text.spi.CollatorProvider;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,17 @@ public class CompanyService {
             CompanyGetResumeList.add(companyGetResume);
         }
         return CompanyGetResumeList;
+    }
+    public List<Company> getCompanyRecruitRandom(Company company){
+        CompanyDao companyDao = new CompanyDao();
+        RecruitDao recruitDao = new RecruitDao();
+        List<Company> companyList = new ArrayList<Company>();
+        companyList = companyDao.getCompanyRecruitRandom(company.getCompanyAddress());
+        for (int i=0;i<companyList.size();i++){
+            List<Recruit> recruitList = recruitDao.getCompanyRecruitByIdRandom(companyList.get(i).getId());
+            companyList.get(i).setRecruits(recruitList);
+        }
+        return companyList;
     }
 
 

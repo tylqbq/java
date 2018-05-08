@@ -9,10 +9,12 @@ import com.bishetyl.entity.CollectionRecruit;
 import com.bishetyl.entity.JobSeeker;
 import com.bishetyl.entity.Recruit;
 import com.bishetyl.util.PageParams;
+import com.sun.javafx.font.directwrite.RECT;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.awt.image.RescaleOp;
 import java.security.PublicKey;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,5 +105,11 @@ public class RecruitService {
         RecruitDao recruitDao = new RecruitDao();
         Boolean isScuess = recruitDao.deleteRecruitById(recruit);
         return isScuess;
+    }
+    //根据地区随机获得招聘
+    public List<Recruit> getRecruitByAddressRandom(Recruit recruit){
+        RecruitDao recruitDao = new RecruitDao();
+        List<Recruit> recruitList = recruitDao.getRecruitByAddressRandom(recruit);
+        return recruitList;
     }
 }
